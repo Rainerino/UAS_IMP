@@ -1,0 +1,76 @@
+/**
+ * Program name: Geese recognition
+ * Author: Yiyi Yan
+ * Purpose: Given this image of a swmp of Geese, output the number of Geese on the image
+ * Link to the image: http://bingwallpaper.anerg.com/201301
+ * Date: 28th Jan 2017
+ * OpenCV version: 3.1.0-dev
+ * C++ compiler version: 6.2.0
+ * */
+#include <iostream>
+#include "opencv2/opencv.hpp"
+using namespace cv;
+using namespace std;
+//This is the upper and lower BGR bounty of the color of Geese.
+int low_r = 70,  low_g = 37, low_b = 40;
+int high_r = 255,  high_g = 255, high_b = 255;
+//This is the upper and lower area bounty of the thresh area of Geese
+const int ALLAREA = 10;
+const int LOWAREA = 100;
+const int HIGHAREA = 1600;
+
+int main(int argc, char** argv) {
+    //check if the augments are valid
+    if (argc != 2) {
+        std::cout << "Need an image as augment!" << std::endl;
+        return -1;
+    }
+    //Read the image if there is an augment
+    Mat image;
+    image = imread(argv[1], CV_LOAD_IMAGE_ANYCOLOR);
+    //check if the file read is an image
+    if (! image.data ) {
+        std::cout << "Oh no! Cant read the file!" << std::endl;
+        return -1;
+    }
+
+    //First uses inrange function to find the edges of Geese
+    Mat mask;
+    inRange(image, Scalar(low_r, low_g, low_b), Scalar(high_r, high_g, high_b), mask);
+    vector<vector<Point>>contour, contourBig;
+    findContours(mask, contour, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+    for (int i = 0; i < contour.size(); i ++) {
+        if (contourArea(contour[i]) > ALLAREA) {
+            contourBig.push_back(contour[i]);
+        }
+    }
+
+    //Select the contours that meet the area requirements and draw contours around them
+    vector<vector<Point>>::iterator itc = contour.begin();
+    vector<RotatedRect> rects;
+    while (itc != contour.end()) {
+        RotatedRect mr = minAreaRect(Mat(*itc));
+        int area = mr.size.height * mr.size.width;
+        if (area < LOWAREA || area > HIGHAREA) {
+            itc = contour.erase(itc);
+        } else {
+            itc ++;
+            rects.push_back(mr);
+        }
+    }
+    //draw contours
+    Scalar color = Scalar( 0, 0, 255);
+    for (int i = 0 ; i < contour.size(); i ++) {
+        drawContours(image, contour, i, color, 1, 8, vector<Vec4i>(), 0, Point());
+    }
+
+    //display outputs
+    printf("The lower bound of the number of the Geese is %lu\n", rects.size());
+    printf("The Upper bound of the number of the Geese is %lu\n", contourBig.size());
+    imshow("Geese with contour highlighted", image);
+    imshow("Geese recognition with thresh", mask);
+
+
+    waitKey(0);
+    return 0;
+}

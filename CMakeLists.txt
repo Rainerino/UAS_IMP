@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.6)
+project(UAS)
+set(OpenCV_FOUND 1)
+set(CMAKE_CXX_STANDARD 11)
+find_package(OpenCV REQUIRED)
+set(SOURCE_FILES main.cpp CanadaGoose.cpp CanadaGoose.h fastBilateral.cpp)
+add_executable(UAS ${SOURCE_FILES})
+target_link_libraries(UAS ${OpenCV_LIBS})

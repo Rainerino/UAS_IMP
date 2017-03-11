@@ -1,0 +1,108 @@
+/**
+ *
+ */
+
+#include "CanadaGoose.h"
+using namespace std;
+using namespace cv;
+
+vector<Mat> CanadaGoose::edgeDetection(Mat src) {
+    //src is raw -> colored
+    Mat input;
+    cvtColor(src, input, CV_BGR2GRAY);
+    threshold(input, input, 123, 255, 0);
+
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    findContours(input, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+    vector<Rect> boundRect(contours.size());
+    vector<vector<Point>> contours_poly( contours.size() );
+
+
+    double area = 0;
+    Mat drawing = Mat::zeros( input.size(), CV_8UC3 );
+
+    for (int i = 0 ; i < contours.size(); i ++) {
+        area = contourArea(contours[i]);
+        if (area < 1000) {
+            contours.erase(contours.begin() + i);
+            i--;
+        }
+    }
+    for( int i = 0; i < contours.size(); i++ ) {
+        approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
+        boundRect[i] = boundingRect(Mat(contours_poly[i]));
+    }
+
+    for (int i = 0 ; i < contours.size(); i ++) {
+        drawContours( drawing, contours, i, Scalar(0, 0, 255), 0, 8, vector<Vec4i>(), 0, Point() );
+
+        rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), Scalar(0, 0, 255), 2, 8, 0);
+    }
+    imshow("drawinng", drawing);
+    Mat temp;
+    vector<Mat> output;
+    string savename = "";
+    for (int i = 0 ; i < contours.size(); i ++) {
+
+        int x = boundRect[i].tl().x ;
+        int y = boundRect[i].tl().y;
+        int w = boundRect[i].br().x - x;
+        int h = boundRect[i].br().y - y;
+        Rect rect = Rect(x, y, w, h);
+        //Rect rect = Rect(100, 100, 20, 200);
+        output.push_back(src(rect));
+    }
+    cout << output.size() << endl;
+    return output;
+}
+
+
+void CanadaGoose::cascadeRecognition(){
+    string temp;
+    geese_cascade.load(geese_cascade_name);
+    Mat image;
+    vector<Mat> output;
+    while(true) {
+        DIR *dir;
+        struct dirent *ent;
+        if ((dir = opendir("//home/yiyi/Documents/CLionProjects/UAS/Sample/")) != NULL) {
+            while (( ent = readdir(dir)) != NULL ) {
+                temp = PATHNAME +  ent->d_name;
+                if (temp.find_first_of(NUMBER) != string::npos ) {
+                    //printf("%s\n" , temp.c_str());
+                    image = imread(temp.c_str());
+                    output = edgeDetection(image);
+                    for (int i = 0 ; i < output.size(); i ++) {
+                        imshow("" + i, output.at(i));
+                        //recognition(output.at(i), "" + i);
+                    }
+                    int c = waitKey(10);
+                    if ((char) c == 27) {
+                        break;
+                    }
+                }
+                temp = "";
+            }
+            closedir(dir);
+        }else{
+            perror("");
+            return; EXIT_FAILURE;
+        }
+
+    }
+
+}
+void CanadaGoose::recognition(Mat frame, string imagename) {
+
+    std::vector<Rect> geese;
+    geese_cascade.detectMultiScale(frame, geese, 1.1, 2, 0 | CASCADE_SCALE_IMAGE, Size(50, 50));
+
+    for (size_t i = 0; i < geese.size(); i++) {
+        Point center(geese[i].x + geese[i].width / 2, geese[i].y + geese[i].height / 2);
+        putText(frame, "Geese", center, FONT_HERSHEY_SIMPLEX, 1.0, CV_RGB(255, 0, 0), 2.0);
+        //ellipse( frame, center, Size( geese[i].width/2, geese[i].height/2), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
+        Mat faceROI = frame(geese[i]);
+    }
+    return frame;
+}

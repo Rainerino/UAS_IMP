@@ -1,0 +1,3 @@
+/home/yiyi/Documents/CLionProjects/UAS/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/yiyi/Documents/CLionProjects/UAS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/yiyi/Documents/CLionProjects/UAS/cmake-build-debug/CMakeFiles/UAS.dir
