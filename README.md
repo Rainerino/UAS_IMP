@@ -22,5 +22,10 @@ To keep the program as sreamlined and optimized as possible, the software uses a
 
 ## Design
 
+### Overview
+
 IMP used [OpenCV](http://opencv.org/) as the machine learning core to process images such as below, and return the number of gooses on the images, with its location relative to the image(the absolute coordinate of the gooses on the image). You can have some fun by looking for goooses on this image. There are 6 of them, 3 different types.
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Testing%20images.jpg, "Optional Title")
+
+### Process flow
+
