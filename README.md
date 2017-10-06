@@ -51,7 +51,7 @@ IMP used [OpenCV](http://opencv.org/) as the machine learning core to process im
 
  We were able to achieve about 70-80% recognition rate with our testing images. Here are some of our testing samples and result :
 
-1. 
+1. Test Case 1
 
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Close_up_with_Snow.jpg "Optional Title")
 
@@ -59,7 +59,7 @@ IMP used [OpenCV](http://opencv.org/) as the machine learning core to process im
 
 ---
 
-2. 
+2. Test Case 2
 
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Uniform_background.jpg "Optional Title")
 
@@ -68,7 +68,7 @@ IMP used [OpenCV](http://opencv.org/) as the machine learning core to process im
 ---
 
 
-3.
+3. Test Case 3
 
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Crazy_difficulty.jpg "Optional Title")
 
