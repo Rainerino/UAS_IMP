@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/yiyi/Documents/CLionProjects/UAS/CanadaGoose.cpp" "/home/yiyi/Documents/CLionProjects/UAS/cmake-build-debug/CMakeFiles/UAS.dir/CanadaGoose.cpp.o"
-  "/home/yiyi/Documents/CLionProjects/UAS/fastBilateral.cpp" "/home/yiyi/Documents/CLionProjects/UAS/cmake-build-debug/CMakeFiles/UAS.dir/fastBilateral.cpp.o"
   "/home/yiyi/Documents/CLionProjects/UAS/main.cpp" "/home/yiyi/Documents/CLionProjects/UAS/cmake-build-debug/CMakeFiles/UAS.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

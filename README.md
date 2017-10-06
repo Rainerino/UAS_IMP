@@ -1,4 +1,4 @@
-Project Name: [UAS](http://www.ubcuas.com/) IMage Processing Unit (IMP)
+Project Name: UAS IMage Processing unit (IMP)
 ============================================
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Team%20picture.JPG "Optional Title")
 ## Introduction
@@ -81,6 +81,18 @@ The algorithm was integrated into GCOM with a GUI and location calculation algor
 Here is one of the aerial images we took that has gooses on it:
 
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Aerial_Goose.JPG "Optional Title")
+
+The submodule did not perform during the competition. Main reason is there are too much unfiltered noise went to the contour calculation, which delay the program and provided extra inputs. Also, the recognition failed to capture the features due to the camera resolution, and over recognized gooses(recognized one goose several times).
+
+### Review
+
+Several things that can improve:
+
+1. Better cropping process(use algorithm for this), that actually identify the objects to make sure no spilting objects or under extracting features. 
+2. Find test cases that are actually close to the operation images. Should have request operations to create images instead of homebrew these bad goals.
+3. USe design pattern to save time. Could first consider multiple kernels before implementing. Also, should have considered deep learning algorithms or NN. Make sure the algorithm is the best for the test after considering other cases and find out why they are not good(instead of trying the ones that works...)
+
+
 
 
 

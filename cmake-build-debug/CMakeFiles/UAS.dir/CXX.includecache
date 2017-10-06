@@ -24,10 +24,6 @@ iostream
 dirent.h
 -
 
-/home/yiyi/Documents/CLionProjects/UAS/fastBilateral.cpp
-opencv2/opencv.hpp
--
-
 /home/yiyi/Documents/CLionProjects/UAS/main.cpp
 CanadaGoose.h
 /home/yiyi/Documents/CLionProjects/UAS/CanadaGoose.h

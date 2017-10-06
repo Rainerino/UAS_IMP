@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/UAS.dir/main.cpp.o"
   "CMakeFiles/UAS.dir/CanadaGoose.cpp.o"
-  "CMakeFiles/UAS.dir/fastBilateral.cpp.o"
   "UAS.pdb"
   "UAS"
 )
