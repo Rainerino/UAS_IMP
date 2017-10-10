@@ -3,8 +3,7 @@ Project Name: UAS IMage Processing unit (IMP)
 ![Alt txt](https://github.com/Rainerino/UAS_IMP/blob/master/Team%20picture.JPG "Optional Title")
 ## Introduction
 
-> This Program is a prototype for the image processing unit of University of British Columbia Unmanned Aircraft System design team ([UAS](http://www.ubcuas.com/))'s Ground Control Station [GCOM private](https://github.com/ubcuas/GCOM) to face the object recongization chanllenge of [2017 Unmanned Systems Canada(USC) student Competition](https://www.unmannedsystems.ca/home/students/student-competition-details/)
-
+> This Program is a prototype for the image processing unit of University of British Columbia Unmanned Aircraft System design team ([UAS](http://www.ubcuas.com/))'s Ground Control Station [GCOM private](https://github.com/ubcuas/GCOM) to face the object recongization chanllenge of [2017 Unmanned Systems Canada(USC) student Competition](https://www.unmannedsystems.ca/home/students/student-competition-details/). See the full implementation in Qt [HERE](https://github.com/Rainerino/UAS_IMP/blob/master/GCOM_IMP)(Need OpenCV library)
 ### Overview of GCOM
 
 > This is a repository for UBC Unmanned Aircraft Systems' ground control station software. The software will act as a form of master server and has the following features:
